@@ -9,7 +9,7 @@ import { AccountAPI, AuthAPI } from "../../../API/API";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const Login = () => {
+const Login = ({setIsAddCart, isAddCart}) => {
 
     const navigate = useNavigate();
 
@@ -45,6 +45,7 @@ const Login = () => {
             toast.success("Login successfully!",{
                 position: toast.POSITION.TOP_CENTER
             })
+            setIsAddCart(!isAddCart)
             return navigate('/')
         })
         .catch(err => {

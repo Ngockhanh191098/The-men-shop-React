@@ -4,12 +4,13 @@ import { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { PaymentAPI } from '../../../API/API';
+import { PaymentAPI, UserAPI } from '../../../API/API';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import './checkout.css';
+import axios from 'axios';
 
-const Checkout = () => {
+const Checkout = ({setIsAddCart, isAddCart}) => {
     const navigate = useNavigate();
     const initialValues = { fullName: "", phone: "", address: "" };
     const [formValues, setFormValues] = useState(initialValues)
@@ -40,11 +41,26 @@ const Checkout = () => {
     const handleCheckout = () => {
         setFormErrors(validate(formValues));
         setIsSubmit(true);
-
     };
     
 
     useEffect(() => {
+
+        axios.get(
+            `${UserAPI.USER_API}/${idUser}`,{
+                headers: {
+                    "x-access-token": localStorage.getItem("token")
+                }
+            }
+        )
+        .then(res => {
+            setFormValues({
+                fullName: res.data.fullName,
+                phone: res.data.phone,
+                address: res.data.address
+            })
+        })
+
         if (Object.keys(formErrors).length === 0 && isSubmit){
             setOpen(true);
             Axios.post(`${PaymentAPI.PAYMENT_API}`,newDataCheckout,{
@@ -57,6 +73,7 @@ const Checkout = () => {
                 toast.success('Checkout successfully! Please check email to see payment details',{
                     position: toast.POSITION.TOP_CENTER
                   });
+                setIsAddCart(!isAddCart)
                 localStorage.removeItem('checkout');
                 return navigate('/')
             })

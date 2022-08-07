@@ -83,9 +83,6 @@ const ManagerAccount = ({setIsAddCart, isAddCart}) => {
                 }
             )
             .then(res => {
-                toast.success(res.data.message,{
-                    position: toast.POSITION.TOP_CENTER
-                  })
                 setAccount(res.data.user);
                 localStorage.setItem('avatar', res.data.user.avatar)
                 setIsAddCart(!isAddCart);

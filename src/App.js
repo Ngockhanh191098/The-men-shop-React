@@ -51,7 +51,7 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<Home setIsAddCart={setIsAddCart} isAddCart={isAddCart}/>}></Route>
                     <Route path='/register' element={<Register />}></Route>
-                    <Route path='/login' element={<Login />}></Route>
+                    <Route path='/login' element={<Login setIsAddCart={setIsAddCart} isAddCart={isAddCart}/>}></Route>
                     <Route path='/product-manager' element={<ProductManager />}></Route>
                     <Route path='/category/product' element={<ProductCate idCategory={idCategory}/>}></Route>
                     <Route path='/account-manager' element={<ManagerAccount setIsAddCart={setIsAddCart} isAddCart={isAddCart}/>}></Route>
@@ -60,7 +60,7 @@ const App = () => {
                     <Route path='/category-manager' element={<CategoryManager />}></Route>
                     <Route path='/customer-manager' element={<CustomerManager />}></Route>
                     <Route path='/cart' element={<Cart setUserCheckout={setUserCheckout} setIsAddCart={setIsAddCart} isAddCart={isAddCart}/>}></Route>
-                    <Route path='/checkout' element={<Checkout userCheckout={userCheckout}/>}></Route>
+                    <Route path='/checkout' element={<Checkout userCheckout={userCheckout} setIsAddCart={setIsAddCart} isAddCart={isAddCart}/>}></Route>
                     <Route path='/product-detail/:id' element={<ProductDetail setIsAddCart={setIsAddCart} isAddCart={isAddCart}/>}></Route>
                     <Route path='/order-manager' element={<OrderManager/>}></Route>
                     <Route path='/order' element={<Order />}></Route>
