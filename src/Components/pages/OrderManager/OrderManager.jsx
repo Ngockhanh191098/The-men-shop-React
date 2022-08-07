@@ -20,7 +20,7 @@ const OrderManager = () => {
             setListOrder(res.data);
         })
         .catch(err => {
-            console.log('loi me roi');
+            console.log(err.response.data.message);
         })
     }, [searchDate]);
 
@@ -66,7 +66,7 @@ const OrderManager = () => {
         <div className="order-manager-container">
             <select name="order" className="search-by-date" onChange={(e) => setSearchDate(e.target.value)}>    
                 <option value="all">All</option>
-                <option value="1">Today</option>
+                <option value="1">Day ago</option>
                 <option value="7">Week ago</option>
                 <option value="30">Month ago</option>
             </select>
